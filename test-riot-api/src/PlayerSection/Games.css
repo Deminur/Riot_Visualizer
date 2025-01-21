@@ -1,0 +1,31 @@
+.wrapper{
+    display:flex;
+    flex-direction: column;
+    width: 100%;
+    height: inherit;
+    border-radius: 15px;
+    overflow-x: hidden;
+}
+
+.game{
+    cursor: pointer;
+}
+
+.game1{
+    background-color: aqua;
+}
+.game2{
+    background-color: rgb(85, 12, 92);
+}
+.game3{
+    background-color: rgb(255, 8, 0);
+}
+.game4{
+    background-color: rgb(65, 161, 36);
+}
+
+.game:hover{
+    border: solid;
+    /* border-radius: 15px; */
+    scale: 1.2;
+}

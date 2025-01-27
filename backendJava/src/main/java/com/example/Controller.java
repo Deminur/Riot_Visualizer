@@ -4,6 +4,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 
@@ -15,7 +19,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RestController
 class Controller {
 
-    private String API_KEY = "RGAPI-d2e53e5f-317d-473e-a129-b6db95f64454";// Regen this every day
+    String API_KEY="";
+
+    public Controller(){
+        File myObj = new File("backendJava/src/main/resources/key.txt");
+        Scanner myReader;
+        try {
+            myReader = new Scanner(myObj);
+            API_KEY = myReader.nextLine();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        System.out.println(API_KEY);
+    }
+
     RestTemplate restTemplate = new RestTemplate();
 
     @CrossOrigin
@@ -81,7 +98,6 @@ class Controller {
             result+=response.getBody();
         }
         result+="]";
-        System.out.println(result);
         return new ResponseEntity<>(result,HttpStatus.OK);
     }
 

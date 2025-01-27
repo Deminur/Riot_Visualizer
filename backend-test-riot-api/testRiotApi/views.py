@@ -32,8 +32,8 @@ def getRankeds(request):
     url = 'https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/'+profileID+'?api_key='+API_KEY
     response = requests.get(url)
     data = response.json()
-    soloQueue = []
-    flex = []
+    soloQueue = None
+    flex = None
     if data:
         for d in range(len(data)):
             if("FLEX" in data[d]['queueType']):
@@ -48,7 +48,7 @@ def getGamesList(request):
     url = 'https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/'+puuid+'/ids?start=0&count='+count+'&api_key='+API_KEY
     response = requests.get(url)
     data = response.json()
-    return JsonResponse({'listOfGames':data})
+    return JsonResponse(data, safe=False)
 
 def getGames(request):
     gameList = request.GET.get("gameList")
@@ -59,4 +59,4 @@ def getGames(request):
         response = requests.get(url)
         data = response.json()
         result.append(data)
-    return JsonResponse({'listOfGames':result})
+    return JsonResponse(result,safe=False)

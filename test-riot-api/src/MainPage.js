@@ -160,7 +160,8 @@ export default function MainPage(props){
             })
             //get the games stats
             axios.get("http://localhost:8000/getGamesList/",{params:{puuid:puuid, count:nbGamesPrinted}}).then(res=>{
-                axios.get("http://localhost:8000/getGames/",{params:{gameList:res.data['listOfGames']}}).then(res=>{
+                console.log(res.data['listOfGames'].toString())
+                axios.get("http://localhost:8000/getGames/",{params:{gameList:res.data['listOfGames'].toString()}}).then(res=>{
                     setGames(res.data['listOfGames'])
                 })
                 

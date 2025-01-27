@@ -1,7 +1,7 @@
 import requests
 from django.http import JsonResponse
 
-API_KEY = "RGAPI-331f7708-38d8-4868-a08e-ee38d2457d97" # Regen this every day
+API_KEY = "RGAPI-be86aefb-9a22-496d-a782-1a68d57d4761" # Regen this every day
 
 def getDemiDecimus(request):
     url = 'https://europe.api.riotgames.com/riot/account/v1/accounts/by-riot-id/ZZ%20Demi%20Decimus/EUW?api_key='+API_KEY
@@ -51,7 +51,8 @@ def getGamesList(request):
     return JsonResponse({'listOfGames':data})
 
 def getGames(request):
-    gameList = request.GET.getlist("gameList[]")
+    gameList = request.GET.get("gameList")
+    gameList = gameList.split(",")
     result = []
     for i in range(len(gameList)):
         url = 'https://europe.api.riotgames.com/lol/match/v5/matches/'+gameList[i]+'?api_key='+API_KEY

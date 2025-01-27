@@ -10,6 +10,7 @@ import GraphZone from "./Graphs/GraphZone";
 export default function MainPage(props){
 
     const nbGamesPrinted = 20
+    const port = 8000
     
     var [puuid,setPuuid] = useState("??")
     var [pseudo,setPseudo] = useState("??")
@@ -133,6 +134,7 @@ export default function MainPage(props){
         var pseudo = input.split("#")
         var uuid = getPuuid(pseudo[0],pseudo[1])
         uuid.then((res) => {
+            console.log(res.data)
             setPuuid(res.data['puuid'])
             setPseudo(res.data['gameName'])
             setTag(res.data['tagLine'])
@@ -147,21 +149,22 @@ export default function MainPage(props){
     }
 
     async function getPuuid(pseudo,tag){
-        return axios.get("http://localhost:8000/getPuuid/",{params:{pseudo:pseudo, tag:tag}})        
+        return axios.get("http://localhost:"+port+"/getPuuid/",{params:{pseudo:pseudo, tag:tag}})        
     }
 
     function getUserProfile(puuid){
-        axios.get("http://localhost:8000/getID/",{params:{puuid:puuid}}).then(res=>{
+        axios.get("http://localhost:"+port+"/getID/",{params:{puuid:puuid}}).then(res=>{
             setLevel(res.data['summonerLevel'])
             //get the ranked stats
-            axios.get("http://localhost:8000/getRankeds/",{params:{id:res.data['id']}}).then(res=>{
+            axios.get("http://localhost:"+port+"/getRankeds/",{params:{id:res.data['id']}}).then(res=>{
+                console.log(typeof res.data,"=>",res.data)
                 setSoloqueueStats(res.data['soloQueue'])
                 setFlexStats(res.data['flex'])
             })
             //get the games stats
-            axios.get("http://localhost:8000/getGamesList/",{params:{puuid:puuid, count:nbGamesPrinted}}).then(res=>{
+            axios.get("http://localhost:"+port+"/getGamesList/",{params:{puuid:puuid, count:nbGamesPrinted}}).then(res=>{
                 console.log(res.data['listOfGames'].toString())
-                axios.get("http://localhost:8000/getGames/",{params:{gameList:res.data['listOfGames'].toString()}}).then(res=>{
+                axios.get("http://localhost:"+port+"/getGames/",{params:{gameList:res.data['listOfGames'].toString()}}).then(res=>{
                     setGames(res.data['listOfGames'])
                 })
                 

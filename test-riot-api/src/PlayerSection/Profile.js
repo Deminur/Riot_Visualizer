@@ -11,18 +11,26 @@ export default function Profile(props){
             <Row>
                 <Col xs={6}>
                     <div><u>Soloqueue</u></div><br/>
-                    <p>
-                    {props.soloqueueStats['tier']} {props.soloqueueStats['rank']} {props.soloqueueStats['leaguePoints']}LP<br/>
-                    {props.soloqueueStats['wins']}/{props.soloqueueStats['losses']+props.soloqueueStats['wins']} : {Math.round((props.soloqueueStats['wins']/(props.soloqueueStats['losses']+props.soloqueueStats['wins']).toFixed(2)) * 100)}%<br/>
-                    </p>
+                    {(props.soloqueueStats)?(
+                        <p>
+                            {props.soloqueueStats['tier']} {props.soloqueueStats['rank']} {props.soloqueueStats['leaguePoints']}LP<br/>
+                            {props.soloqueueStats['wins']}/{props.soloqueueStats['losses']+props.soloqueueStats['wins']} : {Math.round((props.soloqueueStats['wins']/(props.soloqueueStats['losses']+props.soloqueueStats['wins']).toFixed(2)) * 100)}%<br/>
+                        </p>
+                    ):(
+                        <p>no data available</p>
+                    )}
                     
                 </Col>
                 <Col xs={6}>
                 <div><u>Flex 5v5</u></div><br/>
-                <p>
-                    {props.flexStats['tier']} {props.flexStats['rank']} {props.flexStats['leaguePoints']}LP<br/>
-                    {props.flexStats['wins']}/{props.flexStats['losses']+props.flexStats['wins']} : {Math.round((props.flexStats['wins']/(props.flexStats['losses']+props.flexStats['wins']).toFixed(2)) * 100)}%<br/>
-                    </p>
+                    {(props.flexStats)?(
+                        <p>
+                            {props.flexStats['tier']} {props.flexStats['rank']} {props.flexStats['leaguePoints']}LP<br/>
+                            {props.flexStats['wins']}/{props.flexStats['losses']+props.flexStats['wins']} : {Math.round((props.flexStats['wins']/(props.flexStats['losses']+props.flexStats['wins']).toFixed(2)) * 100)}%<br/>
+                        </p>
+                    ):(
+                        <p>no data available</p>
+                    )}
                 </Col>
             </Row>
         </Container>

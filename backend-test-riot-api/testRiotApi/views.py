@@ -1,7 +1,11 @@
 import requests
+import os
 from django.http import JsonResponse
 
-API_KEY = "RGAPI-be86aefb-9a22-496d-a782-1a68d57d4761" # Regen this every day
+module_dir = os.path.dirname(__file__)  
+file_path = os.path.join(module_dir, 'key.txt')   #full path to text.
+data_file = open(file_path , 'r')  
+API_KEY = data_file.read()
 
 def getDemiDecimus(request):
     url = 'https://europe.api.riotgames.com/riot/account/v1/accounts/by-riot-id/ZZ%20Demi%20Decimus/EUW?api_key='+API_KEY

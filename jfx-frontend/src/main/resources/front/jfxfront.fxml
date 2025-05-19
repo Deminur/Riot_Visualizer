@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-
-<GridPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="front.JFXFront">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
    </columnConstraints>
@@ -25,9 +25,18 @@
    <children>
       <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="71.0" prefWidth="1100.0">
          <children>
-            <Label text="Pseudo : " />
-            <TextField fx:id="pseudoArea" prefHeight="25.0" prefWidth="224.0" />
-            <Button fx:id="btnSearch" mnemonicParsing="false" text="Rechercher" />
+            <Label text="Pseudo : ">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+            <TextField fx:id="pseudoArea" prefHeight="25.0" prefWidth="224.0">
+               <font>
+                  <Font size="18.0" />
+               </font></TextField>
+            <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#onClickSearch" text="Rechercher">
+               <font>
+                  <Font size="18.0" />
+               </font></Button>
          </children>
       </HBox>
       <GridPane GridPane.rowIndex="1">
@@ -57,8 +66,14 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Label fx:id="labelPseudo" alignment="CENTER" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="282.0" text="??#??" GridPane.halignment="CENTER" />
-                        <Label fx:id="labelLVL" alignment="CENTER" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="282.0" text="LVL ??" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <Label fx:id="labelPseudo" alignment="CENTER" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="282.0" text="??#??" GridPane.halignment="CENTER">
+                           <font>
+                              <Font size="18.0" />
+                           </font></Label>
+                        <Label fx:id="labelLVL" alignment="CENTER" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="282.0" text="LVL ??" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                           <font>
+                              <Font size="18.0" />
+                           </font></Label>
                      </children>
                   </GridPane>
                   <GridPane prefHeight="187.0" prefWidth="478.0" GridPane.rowIndex="1">
@@ -75,15 +90,24 @@
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                            </columnConstraints>
                            <rowConstraints>
-                              <RowConstraints maxHeight="58.0" minHeight="3.0" prefHeight="24.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="122.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="140.0" minHeight="8.0" prefHeight="34.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="130.0" minHeight="2.0" prefHeight="104.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="58.0" minHeight="3.0" prefHeight="38.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="122.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="140.0" minHeight="8.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="130.0" minHeight="2.0" prefHeight="85.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="132.0" text="Soloqueue" textAlignment="CENTER" underline="true" GridPane.halignment="CENTER" />
-                              <Label fx:id="labelSoloqueueRank" text="LP" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                              <Label fx:id="labelSoloqueueRatio" text="??/?? : ??%" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="132.0" text="Soloqueue" textAlignment="CENTER" underline="true" GridPane.halignment="CENTER">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font></Label>
+                              <Label fx:id="labelSoloqueueRank" text="LP" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font></Label>
+                              <Label fx:id="labelSoloqueueRatio" text="??/?? : ??%" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font></Label>
                            </children>
                         </GridPane>
                         <GridPane prefHeight="87.0" prefWidth="124.0" GridPane.columnIndex="1">
@@ -91,15 +115,24 @@
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                            </columnConstraints>
                            <rowConstraints>
-                              <RowConstraints maxHeight="58.0" minHeight="3.0" prefHeight="24.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="122.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="140.0" minHeight="8.0" prefHeight="34.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="130.0" minHeight="2.0" prefHeight="104.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="58.0" minHeight="3.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="122.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="140.0" minHeight="4.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="130.0" minHeight="2.0" prefHeight="84.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="132.0" text="Flex 5v5" textAlignment="CENTER" underline="true" GridPane.halignment="CENTER" />
-                              <Label fx:id="labelFlexRank" text="LP" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                              <Label fx:id="labelFlexRatio" text="??/?? : ??%" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="132.0" text="Flex 5v5" textAlignment="CENTER" underline="true" GridPane.halignment="CENTER">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font></Label>
+                              <Label fx:id="labelFlexRank" text="LP" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font></Label>
+                              <Label fx:id="labelFlexRatio" text="??/?? : ??%" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font></Label>
                            </children>
                         </GridPane>
                      </children>

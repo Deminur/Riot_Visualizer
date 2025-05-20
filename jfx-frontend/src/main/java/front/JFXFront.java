@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 
@@ -30,6 +31,9 @@ public class JFXFront {
 
     @FXML
     private ScrollPane scrollListGames;
+
+    @FXML
+    private ProgressIndicator progressIndicator;
 
     @FXML
     private BarChart<String,Integer> chartPings;

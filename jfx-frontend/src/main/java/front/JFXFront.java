@@ -46,6 +46,8 @@ public class JFXFront {
     @FXML
     private BarChart<String,Integer> chartSpells;
 
+    private PlayerStats playerStats;
+
     private final int PORT = 8000;
 
     public void setPseudo(String pseudo){
@@ -58,12 +60,10 @@ public class JFXFront {
 
     public void startProgressIndicator(){
         this.progressIndicator.setVisible(true);
-        System.out.println("start"+this.progressIndicator.isVisible());
     }
 
     public void stopProgressIndicator(){
         this.progressIndicator.setVisible(false);
-        System.out.println("stop"+this.progressIndicator.isVisible());
     }
 
     public void setSoloqueueStats(String tier, String rank, Long Lp, Long win, Long loss){
@@ -78,16 +78,29 @@ public class JFXFront {
         this.labelFlexRatio.setText(win+"/"+loss+" : "+ratio+"%");
     }
 
+    public void setPlayerStats(PlayerStats playerStats){
+        this.playerStats = playerStats;
+    }
+
     @FXML
     private void onClickSearch(){
         try {
             this.startProgressIndicator();
             ThreadableOnClickSearch t = new ThreadableOnClickSearch(this.pseudoArea.getText(), this, PORT);
             Thread thread = new Thread(t);
-            thread.start();
+            thread.start();        
         } catch (Exception e) {
             this.setPseudo("??");
             System.err.println("error in pseudo");
         }
+    }
+
+    public void refreshIHM() {
+        this.labelPseudo.setText(this.playerStats.getPseudo());
+        this.labelLVL.setText(this.playerStats.getLevel());
+        this.labelFlexRank.setText(this.playerStats.getFlexStats().getLp());
+        this.labelFlexRatio.setText(this.playerStats.getFlexStats().getRatio());
+        this.labelSoloqueueRank.setText(this.playerStats.getSoloqueueStats().getLp());
+        this.labelSoloqueueRatio.setText(this.playerStats.getSoloqueueStats().getRatio());
     }
 }

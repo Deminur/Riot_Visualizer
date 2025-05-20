@@ -6,6 +6,8 @@ import java.util.Scanner;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import javafx.application.Platform;
+
 public class ThreadableOnClickSearch implements Runnable {
 
     private String entry;
@@ -35,7 +37,7 @@ public class ThreadableOnClickSearch implements Runnable {
             scan.close();
             JSONObject data = (JSONObject) parser.parse(inline);
             this.puuid = ((String) data.get("puuid"));
-            this.parent.setPseudo((String) data.get("gameName"));
+            String pseudo = (String) data.get("gameName");
             if(this.puuid!="??"){
                 //Get ID
                 url = new URL("http://localhost:"+PORT+"/getID/?puuid="+this.puuid);
@@ -46,7 +48,7 @@ public class ThreadableOnClickSearch implements Runnable {
                 }
                 scan.close();
                 data = (JSONObject) parser.parse(inline);
-                this.parent.setLVL("LVL "+(Long) data.get("summonerLevel"));
+                PlayerStats playerStats = new PlayerStats(pseudo, ((Long) data.get("summonerLevel")).toString());
                 this.id = (String) data.get("id");
 
                 //Get ranked stats
@@ -60,10 +62,26 @@ public class ThreadableOnClickSearch implements Runnable {
                 data = (JSONObject) parser.parse(inline);
                 //Soloqueue
                 JSONObject soloqueue = (JSONObject) data.get("soloQueue");
-                this.parent.setSoloqueueStats((String) soloqueue.get("tier"), (String) soloqueue.get("rank"), (Long) soloqueue.get("leaguePoints"), (Long) soloqueue.get("wins"), (Long) soloqueue.get("losses"));;
-                //Flex
+                PlayerRankedStats soloqueueStats;
+                if(soloqueue==null){
+                    soloqueueStats = new PlayerRankedStats("??",0,0);
+                }else{
+                    soloqueueStats = new PlayerRankedStats((String) soloqueue.get("tier")+" "+ (String) soloqueue.get("rank")+" "+ (Long) soloqueue.get("leaguePoints"), ((Long) soloqueue.get("wins")).intValue(), ((Long) soloqueue.get("losses")).intValue());
+                }
+                  //Flex
                 JSONObject flex = (JSONObject) data.get("flex");
-                this.parent.setFlexStats((String) flex.get("tier"), (String) flex.get("rank"), (Long) flex.get("leaguePoints"), (Long) flex.get("wins"), (Long) flex.get("losses"));
+                PlayerRankedStats flexStats;
+                if(flex==null){
+                    flexStats = new PlayerRankedStats("??",0,0);
+                }else{
+                    flexStats = new PlayerRankedStats((String) flex.get("tier")+" "+ (String) flex.get("rank")+" "+ (Long) flex.get("leaguePoints"), ((Long) flex.get("wins")).intValue(), ((Long) flex.get("losses")).intValue());
+                }
+                playerStats.setSoloqueueStats(soloqueueStats);
+                playerStats.setFlexStats(flexStats);
+                this.parent.setPlayerStats(playerStats);
+
+                //refresh the Frontend
+                Platform.runLater(()->this.parent.refreshIHM());
             }
         } catch (Exception e) {
             // TODO: handle exception

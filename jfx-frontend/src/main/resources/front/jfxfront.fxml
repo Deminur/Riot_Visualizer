@@ -216,7 +216,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ProgressIndicator fx:id="progressIndicator" prefHeight="41.0" prefWidth="155.0" progress="0.0" visible="false" />
+            <ProgressIndicator fx:id="progressIndicator" prefHeight="41.0" prefWidth="155.0" visible="false" />
          </children>
       </GridPane>
    </children>

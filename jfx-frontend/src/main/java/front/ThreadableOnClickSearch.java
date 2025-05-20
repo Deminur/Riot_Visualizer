@@ -1,6 +1,5 @@
 package front;
 
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
@@ -70,6 +69,7 @@ public class ThreadableOnClickSearch implements Runnable {
             // TODO: handle exception
             System.out.println(e);
         }
+        this.parent.stopProgressIndicator();
     }
     
 }

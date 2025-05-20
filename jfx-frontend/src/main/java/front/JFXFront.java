@@ -56,6 +56,16 @@ public class JFXFront {
         this.labelLVL.setText(Lvl);
     }
 
+    public void startProgressIndicator(){
+        this.progressIndicator.setVisible(true);
+        System.out.println("start"+this.progressIndicator.isVisible());
+    }
+
+    public void stopProgressIndicator(){
+        this.progressIndicator.setVisible(false);
+        System.out.println("stop"+this.progressIndicator.isVisible());
+    }
+
     public void setSoloqueueStats(String tier, String rank, Long Lp, Long win, Long loss){
         this.labelSoloqueueRank.setText(tier+" "+rank+" "+Lp+" LP");
         int ratio = Math.round((win.floatValue()/(loss.floatValue()+win.floatValue()))*100);
@@ -71,8 +81,10 @@ public class JFXFront {
     @FXML
     private void onClickSearch(){
         try {
+            this.startProgressIndicator();
             ThreadableOnClickSearch t = new ThreadableOnClickSearch(this.pseudoArea.getText(), this, PORT);
-            t.run();
+            Thread thread = new Thread(t);
+            thread.start();
         } catch (Exception e) {
             this.setPseudo("??");
             System.err.println("error in pseudo");
